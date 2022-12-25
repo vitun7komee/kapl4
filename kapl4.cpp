@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <fstream>
 #include <string>
 #include "Queue_list.h"
@@ -177,7 +177,7 @@ std::string print_to_string(const Tree& t)
 	return result;
 }
 
-void deleteElem(Tree root, Tree& min, Tree& max, TInfo min_info, TInfo max_info)
+void deleteElem(Tree root, Tree& max, TInfo max_info)
 {
 
 
@@ -210,7 +210,7 @@ bool is_leaf(Tree p)
 	return false;
 }
 
-void task1(Tree root, Tree& min, Tree& max, TInfo& min_info, TInfo& max_info)
+void task(Tree root, Tree& max, TInfo& max_info)
 {
 	QUEUE q;
 	q.Enqueue(root);
@@ -250,15 +250,16 @@ int main()
 	file >> count;
 	Tree root = Build_Balans(file, count);
 	Print(root, 0);
-	Tree min = nullptr, max = nullptr;
-	TInfo min_info = 0, max_info = 0;
-	task1(root, min, max, min_info, max_info);
-	std::cout << "----------------------------------\n";
-	std::cout << "    Max elem:  " << max_info << '\n';
-	std::cout << "----------------------------------\n";
-	deleteElem(root, min, max, min_info, max_info);
-	std::cout << '\n';
+	Tree  max = nullptr;
+	TInfo  max_info = 0;
+	task(root, max,  max_info);
+	std::cout << std::endl;
+	std::cout << "    Max element:  " << max_info << '\n';
+	std::cout << std::endl;
+	deleteElem(root,  max, max_info);
+
 	Print(root, 0);
+
 	Clear(root);
 	std::cin.get();
 }
